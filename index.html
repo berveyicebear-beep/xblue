@@ -460,13 +460,13 @@ input{font-family:inherit;font-size:16px;outline:none;border:none}
             <div class="menu-lft"><span class="menu-ic">📖</span><span class="menu-name">酿造科普内容</span></div>
             <span class="menu-badge" style="background:var(--greena);color:var(--green2);border:1px solid rgba(34,160,90,.3)">L1权益</span>
           </div>
-          <div class="menu-row">
+          <div class="menu-row" onclick="openAroma()">
             <div class="menu-lft"><span class="menu-ic">🎡</span><span class="menu-name">香气轮盘互动</span></div>
-            <span class="menu-badge" style="background:var(--greena);color:var(--green2);border:1px solid rgba(34,160,90,.3)">L1权益</span>
+            <span class="menu-arr">›</span>
           </div>
-          <div class="menu-row">
+          <div class="menu-row" onclick="openTasting()">
             <div class="menu-lft"><span class="menu-ic">🎟</span><span class="menu-name">品鉴会报名</span></div>
-            <span class="menu-badge" style="background:var(--teala);color:var(--teal2);border:1px solid rgba(34,170,190,.3)">L2权益</span>
+            <span class="menu-arr">›</span>
           </div>
         </div>
         <div class="menu-group">
@@ -480,6 +480,204 @@ input{font-family:inherit;font-size:16px;outline:none;border:none}
           </div>
         </div>
         <button class="btn-logout" onclick="doLogout()">退出登录</button>
+      </div>
+    </div>
+
+    <!-- ─ AROMA WHEEL PAGE ─ -->
+    <div class="page" id="pg-aroma">
+      <div style="padding:0 0 100px">
+        <div style="background:var(--bg2);border-bottom:1px solid var(--bdr);padding:14px 16px;display:flex;align-items:center;gap:10px">
+          <button onclick="closeSubPage('aroma')" style="color:var(--txt2);font-size:14px;display:flex;align-items:center;gap:4px;padding:6px 12px;border:1px solid var(--bdr);border-radius:20px">‹ 返回</button>
+          <span style="font-size:16px;color:var(--gold);letter-spacing:1px">🎡 香气轮盘</span>
+          <span style="margin-left:auto;font-size:10px;background:var(--greena);color:var(--green2);border:1px solid rgba(34,160,90,.3);padding:3px 10px;border-radius:20px">L1 专属</span>
+        </div>
+        <div style="padding:16px">
+          <div style="background:linear-gradient(135deg,var(--bg3),var(--bg4));border:1px solid var(--bdr2);border-radius:18px;padding:18px;margin-bottom:18px">
+            <div style="font-size:13px;color:var(--txt2);line-height:1.8">探索橡蓝五款精酿的香气谱系，点击每个香气节点，了解其在酿造中的来源与感知方式。</div>
+          </div>
+
+          <!-- Aroma Wheel SVG -->
+          <div style="background:var(--bg2);border:1px solid var(--bdr);border-radius:18px;padding:16px;margin-bottom:16px;text-align:center">
+            <svg id="aroma-svg" viewBox="0 0 320 320" style="width:100%;max-width:320px" onclick="aromaClick(event)">
+              <!-- Center -->
+              <circle cx="160" cy="160" r="40" fill="#1d3450" stroke="rgba(201,168,76,.5)" stroke-width="1.5"/>
+              <text x="160" y="155" text-anchor="middle" fill="#c9a84c" font-size="11" font-weight="600">橡蓝</text>
+              <text x="160" y="170" text-anchor="middle" fill="#9a8f78" font-size="9">香气轮盘</text>
+              <!-- Ring 1: 5 categories -->
+              <g id="ar-fruit"><path d="M160,160 L113,80 A90,90 0 0,1 160,70 Z" fill="rgba(74,143,196,.25)" stroke="rgba(74,143,196,.4)" stroke-width="1"/><text x="140" y="100" text-anchor="middle" fill="#4a8fc4" font-size="9" font-weight="600">果香</text></g>
+              <g id="ar-grain"><path d="M160,160 L207,80 A90,90 0 0,1 240,130 Z" fill="rgba(201,168,76,.2)" stroke="rgba(201,168,76,.35)" stroke-width="1"/><text x="210" y="108" text-anchor="middle" fill="#c9a84c" font-size="9" font-weight="600">谷物</text></g>
+              <g id="ar-flower"><path d="M160,160 L240,130 A90,90 0 0,1 220,210 Z" fill="rgba(180,120,200,.2)" stroke="rgba(180,120,200,.35)" stroke-width="1"/><text x="220" y="175" text-anchor="middle" fill="#c088e0" font-size="9" font-weight="600">花香</text></g>
+              <g id="ar-bitter"><path d="M160,160 L220,210 A90,90 0 0,1 113,240 Z" fill="rgba(90,158,111,.2)" stroke="rgba(90,158,111,.35)" stroke-width="1"/><text x="165" y="235" text-anchor="middle" fill="#5a9e6f" font-size="9" font-weight="600">苦味/草本</text></g>
+              <g id="ar-roast"><path d="M160,160 L113,240 A90,90 0 0,1 113,80 Z" fill="rgba(139,94,60,.25)" stroke="rgba(139,94,60,.4)" stroke-width="1"/><text x="103" y="163" text-anchor="middle" fill="#a06840" font-size="9" font-weight="600">烘焙</text></g>
+              <!-- Ring 2: sub-nodes -->
+              <!-- Fruit sub -->
+              <circle cx="120" cy="58" r="16" fill="rgba(74,143,196,.15)" stroke="rgba(74,143,196,.5)" stroke-width="1" data-aroma="柑橘" data-desc="来自卡斯卡特、阿马里洛酒花，橙皮与柚子的清爽前调，在浅度·橡蓝与净度·橡蓝中最为突出。"/>
+              <text x="120" y="62" text-anchor="middle" fill="#4a8fc4" font-size="8">柑橘</text>
+              <circle cx="165" cy="52" r="16" fill="rgba(74,143,196,.15)" stroke="rgba(74,143,196,.5)" stroke-width="1" data-aroma="热带果香" data-desc="来自西姆科、莫图依卡酒花，百香果与芒果的浓郁香气，在半·橡蓝IPA与满·橡蓝中层次最丰富。"/>
+              <text x="165" y="56" text-anchor="middle" fill="#4a8fc4" font-size="8">热带</text>
+              <!-- Grain sub -->
+              <circle cx="232" cy="88" r="16" fill="rgba(201,168,76,.15)" stroke="rgba(201,168,76,.4)" stroke-width="1" data-aroma="麦芽" data-desc="大麦麦芽提供甜润饱满的骨架，是精酿的基础底色。在浅度·橡蓝中表现为轻盈麦香，在满·橡蓝中则醇厚丰满。"/>
+              <text x="232" y="92" text-anchor="middle" fill="#c9a84c" font-size="8">麦芽</text>
+              <circle cx="255" cy="145" r="16" fill="rgba(201,168,76,.15)" stroke="rgba(201,168,76,.4)" stroke-width="1" data-aroma="谷物甜" data-desc="来自小麦、燕麦辅料，带来柔滑的口感和淡淡甜感，在净度·橡蓝五谷配方中尤为明显，降低甜腻感知。"/>
+              <text x="255" y="149" text-anchor="middle" fill="#c9a84c" font-size="8">谷物甜</text>
+              <!-- Flower sub -->
+              <circle cx="242" cy="200" r="16" fill="rgba(180,120,200,.15)" stroke="rgba(180,120,200,.4)" stroke-width="1" data-aroma="花香" data-desc="来自世纪、亚麻黄酒花的中后段干投，带来淡雅的茉莉与玫瑰香气，在半·橡蓝IPA中段最为清晰。"/>
+              <text x="242" y="204" text-anchor="middle" fill="#c088e0" font-size="8">花香</text>
+              <!-- Bitter sub -->
+              <circle cx="185" cy="248" r="16" fill="rgba(90,158,111,.15)" stroke="rgba(90,158,111,.4)" stroke-width="1" data-aroma="草本辛香" data-desc="来自萨兹、亚麻黄酒花，带来辛辣草本的收口感，让整体苦度更立体。浅度·橡蓝收口明显，满·橡蓝草本层次最深。"/>
+              <text x="185" y="252" text-anchor="middle" fill="#5a9e6f" font-size="8">草本</text>
+              <circle cx="130" cy="255" r="16" fill="rgba(90,158,111,.15)" stroke="rgba(90,158,111,.4)" stroke-width="1" data-aroma="松脂/树脂" data-desc="来自银河、莫图依卡酒花的高倍投放，是满·橡蓝4×IPA的标志性香气——松木与树脂感叠加，醇厚持久。"/>
+              <text x="130" y="259" text-anchor="middle" fill="#5a9e6f" font-size="8">松脂</text>
+              <!-- Roast sub -->
+              <circle cx="76" cy="195" r="16" fill="rgba(139,94,60,.15)" stroke="rgba(139,94,60,.4)" stroke-width="1" data-aroma="香蕉·丁香" data-desc="来自零度·橡蓝的天然发酵，小麦酵母产生的酯类化合物，带来迷人香蕉与丁香酯香，无酒精但香气完整。"/>
+              <text x="76" y="199" text-anchor="middle" fill="#a06840" font-size="8">香蕉丁香</text>
+              <circle cx="65" cy="128" r="16" fill="rgba(139,94,60,.15)" stroke="rgba(139,94,60,.4)" stroke-width="1" data-aroma="接骨木花" data-desc="零度·橡蓝回填的天然接骨木花与柑橘皮，补足去醇后的香气损失，带来清雅花果底香。"/>
+              <text x="65" y="132" text-anchor="middle" fill="#a06840" font-size="8">接骨木</text>
+            </svg>
+          </div>
+
+          <!-- Aroma Info Card -->
+          <div id="aroma-info" style="background:var(--bg2);border:1px solid var(--bdr2);border-radius:16px;padding:18px;margin-bottom:16px;display:none">
+            <div style="font-size:16px;font-weight:600;color:var(--gold2);margin-bottom:8px" id="aroma-info-title"></div>
+            <div style="font-size:13px;color:var(--txt2);line-height:1.8" id="aroma-info-desc"></div>
+          </div>
+
+          <!-- Product Aroma Match -->
+          <div style="background:var(--bg2);border:1px solid var(--bdr);border-radius:16px;padding:16px;margin-bottom:16px">
+            <div style="font-size:14px;color:var(--gold);margin-bottom:14px;letter-spacing:1px">📊 各款产品香气特征</div>
+            <div id="aroma-product-list"></div>
+          </div>
+
+          <!-- Tips -->
+          <div style="background:linear-gradient(135deg,var(--bg3),var(--bg4));border:1px solid var(--bdr);border-radius:16px;padding:16px">
+            <div style="font-size:13px;color:var(--gold);margin-bottom:10px;letter-spacing:1px">🍺 品鉴小技巧</div>
+            <div style="display:flex;flex-direction:column;gap:10px">
+              <div style="display:flex;gap:10px;align-items:flex-start">
+                <span style="background:rgba(201,168,76,.2);border-radius:50%;width:24px;height:24px;display:flex;align-items:center;justify-content:center;font-size:11px;color:var(--gold);flex-shrink:0;font-weight:700">1</span>
+                <span style="font-size:12px;color:var(--txt2);line-height:1.6">开瓶后先静置30秒，让酒液在杯中略微升温，香气分子更活跃。</span>
+              </div>
+              <div style="display:flex;gap:10px;align-items:flex-start">
+                <span style="background:rgba(201,168,76,.2);border-radius:50%;width:24px;height:24px;display:flex;align-items:center;justify-content:center;font-size:11px;color:var(--gold);flex-shrink:0;font-weight:700">2</span>
+                <span style="font-size:12px;color:var(--txt2);line-height:1.6">轻轻旋转杯身，嗅前调（果香/花香）→ 中调（麦芽/谷物）→ 后调（草本/烘焙）。</span>
+              </div>
+              <div style="display:flex;gap:10px;align-items:flex-start">
+                <span style="background:rgba(201,168,76,.2);border-radius:50%;width:24px;height:24px;display:flex;align-items:center;justify-content:center;font-size:11px;color:var(--gold);flex-shrink:0;font-weight:700">3</span>
+                <span style="font-size:12px;color:var(--txt2);line-height:1.6">入口后屏住呼吸3秒，让酒液覆盖整个口腔，再用鼻腔呼气感受回香。</span>
+              </div>
+              <div style="display:flex;gap:10px;align-items:flex-start">
+                <span style="background:rgba(201,168,76,.2);border-radius:50%;width:24px;height:24px;display:flex;align-items:center;justify-content:center;font-size:11px;color:var(--gold);flex-shrink:0;font-weight:700">4</span>
+                <span style="font-size:12px;color:var(--txt2);line-height:1.6">尝试用轮盘语言描述你感知到的香气，记录在备忘录中，建立自己的香气词库。</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ─ TASTING REGISTRATION PAGE ─ -->
+    <div class="page" id="pg-tasting">
+      <div style="padding:0 0 100px">
+        <div style="background:var(--bg2);border-bottom:1px solid var(--bdr);padding:14px 16px;display:flex;align-items:center;gap:10px">
+          <button onclick="closeSubPage('tasting')" style="color:var(--txt2);font-size:14px;display:flex;align-items:center;gap:4px;padding:6px 12px;border:1px solid var(--bdr);border-radius:20px">‹ 返回</button>
+          <span style="font-size:16px;color:var(--gold);letter-spacing:1px">🎟 橡蓝香气夜</span>
+          <span id="tasting-badge" style="margin-left:auto;font-size:10px;padding:3px 10px;border-radius:20px"></span>
+        </div>
+        <div style="padding:16px">
+
+          <!-- Hero -->
+          <div style="background:linear-gradient(135deg,var(--bg3),var(--bg4));border:1px solid var(--bdr2);border-radius:18px;padding:20px;margin-bottom:18px;position:relative;overflow:hidden">
+            <div style="position:absolute;right:-10px;top:-10px;font-size:80px;opacity:.05">🌙</div>
+            <div style="font-size:20px;color:var(--gold2);font-weight:300;letter-spacing:3px;margin-bottom:8px">橡蓝香气夜</div>
+            <div style="font-size:12px;color:var(--txt2);line-height:1.8">每月一城，每场约30人，专注、安静、只聊酒。<br>L2 懂香者享免费入场；L1 会员优先报名资格。</div>
+            <div style="display:flex;gap:8px;margin-top:12px;flex-wrap:wrap">
+              <span style="background:rgba(42,160,181,.15);border:1px solid rgba(42,160,181,.3);color:var(--teal2);padding:4px 12px;border-radius:20px;font-size:11px">📅 每月举办</span>
+              <span style="background:rgba(42,160,181,.15);border:1px solid rgba(42,160,181,.3);color:var(--teal2);padding:4px 12px;border-radius:20px;font-size:11px">📍 城市轮换</span>
+              <span style="background:rgba(42,160,181,.15);border:1px solid rgba(42,160,181,.3);color:var(--teal2);padding:4px 12px;border-radius:20px;font-size:11px">👥 约30人/场</span>
+            </div>
+          </div>
+
+          <!-- Access level notice -->
+          <div id="tasting-access-notice" style="margin-bottom:16px"></div>
+
+          <!-- Upcoming Sessions -->
+          <div style="font-size:14px;color:var(--gold);margin-bottom:12px;letter-spacing:1px;display:flex;align-items:center;gap:8px">
+            近期场次
+            <div style="flex:1;height:1px;background:linear-gradient(to right,rgba(138,111,46,.6),transparent)"></div>
+          </div>
+          <div id="tasting-sessions"></div>
+
+          <!-- Registration Form (shown when clicking a session) -->
+          <div id="tasting-form-wrap" style="display:none">
+            <div style="font-size:14px;color:var(--gold);margin:16px 0 12px;letter-spacing:1px;display:flex;align-items:center;gap:8px">
+              填写报名信息
+              <div style="flex:1;height:1px;background:linear-gradient(to right,rgba(138,111,46,.6),transparent)"></div>
+            </div>
+            <div style="background:var(--bg2);border:1px solid var(--bdr);border-radius:16px;padding:16px">
+              <div style="background:var(--bg3);border:1px solid var(--bdr2);border-radius:12px;padding:12px 14px;margin-bottom:16px">
+                <div style="font-size:13px;color:var(--gold2)" id="form-session-title"></div>
+                <div style="font-size:11px;color:var(--txt2);margin-top:4px" id="form-session-meta"></div>
+              </div>
+              <div style="margin-bottom:14px">
+                <label style="display:block;font-size:11px;color:var(--txt2);margin-bottom:6px;letter-spacing:1px">姓名</label>
+                <input id="reg-name" style="width:100%;background:rgba(255,255,255,.05);border:1px solid var(--bdr);color:var(--txt);padding:11px 14px;border-radius:12px;font-size:16px" placeholder="真实姓名">
+              </div>
+              <div style="margin-bottom:14px">
+                <label style="display:block;font-size:11px;color:var(--txt2);margin-bottom:6px;letter-spacing:1px">手机号</label>
+                <input id="reg-phone" type="tel" style="width:100%;background:rgba(255,255,255,.05);border:1px solid var(--bdr);color:var(--txt);padding:11px 14px;border-radius:12px;font-size:16px" placeholder="用于活动通知">
+              </div>
+              <div style="margin-bottom:14px">
+                <label style="display:block;font-size:11px;color:var(--txt2);margin-bottom:6px;letter-spacing:1px">精酿饮龄</label>
+                <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:8px" id="exp-options">
+                  <div class="exp-opt" data-val="入门(<1年)" onclick="selectExp(this)" style="padding:10px 6px;background:rgba(255,255,255,.04);border:1px solid var(--bdr);border-radius:10px;text-align:center;font-size:12px;color:var(--txt2)">入门 &lt;1年</div>
+                  <div class="exp-opt" data-val="进阶(1-3年)" onclick="selectExp(this)" style="padding:10px 6px;background:rgba(255,255,255,.04);border:1px solid var(--bdr);border-radius:10px;text-align:center;font-size:12px;color:var(--txt2)">进阶 1–3年</div>
+                  <div class="exp-opt" data-val="资深(3年以上)" onclick="selectExp(this)" style="padding:10px 6px;background:rgba(255,255,255,.04);border:1px solid var(--bdr);border-radius:10px;text-align:center;font-size:12px;color:var(--txt2)">资深 3年+</div>
+                </div>
+              </div>
+              <div style="margin-bottom:16px">
+                <label style="display:block;font-size:11px;color:var(--txt2);margin-bottom:6px;letter-spacing:1px">备注（可选）</label>
+                <textarea id="reg-note" rows="2" style="width:100%;background:rgba(255,255,255,.05);border:1px solid var(--bdr);color:var(--txt);padding:11px 14px;border-radius:12px;font-size:14px;resize:none;font-family:inherit" placeholder="饮食禁忌、特殊需求等"></textarea>
+              </div>
+              <button onclick="submitReg()" style="width:100%;background:var(--gold);color:var(--bg);padding:14px;border-radius:12px;font-size:15px;font-weight:800;letter-spacing:2px">确认报名</button>
+            </div>
+          </div>
+
+          <!-- My Registrations -->
+          <div id="my-regs-wrap" style="margin-top:18px;display:none">
+            <div style="font-size:14px;color:var(--gold);margin-bottom:12px;letter-spacing:1px;display:flex;align-items:center;gap:8px">
+              我的报名记录
+              <div style="flex:1;height:1px;background:linear-gradient(to right,rgba(138,111,46,.6),transparent)"></div>
+            </div>
+            <div id="my-regs-list"></div>
+          </div>
+
+          <!-- What to expect -->
+          <div style="background:var(--bg2);border:1px solid var(--bdr);border-radius:16px;padding:16px;margin-top:16px">
+            <div style="font-size:13px;color:var(--gold);margin-bottom:12px">🌙 活动流程</div>
+            <div style="display:flex;flex-direction:column;gap:0">
+              <div style="display:flex;gap:12px;padding:10px 0;border-bottom:1px solid var(--bdr)">
+                <span style="color:var(--gold);font-size:12px;min-width:44px;font-weight:600">19:00</span>
+                <span style="font-size:12px;color:var(--txt2)">签到入场，领取品鉴套装与香气轮盘卡片</span>
+              </div>
+              <div style="display:flex;gap:12px;padding:10px 0;border-bottom:1px solid var(--bdr)">
+                <span style="color:var(--gold);font-size:12px;min-width:44px;font-weight:600">19:30</span>
+                <span style="font-size:12px;color:var(--txt2)">酿酒师主讲：本期主题产品的原料与工艺解析</span>
+              </div>
+              <div style="display:flex;gap:12px;padding:10px 0;border-bottom:1px solid var(--bdr)">
+                <span style="color:var(--gold);font-size:12px;min-width:44px;font-weight:600">20:00</span>
+                <span style="font-size:12px;color:var(--txt2)">盲品环节：3款产品盲品，结合香气轮盘识别香气</span>
+              </div>
+              <div style="display:flex;gap:12px;padding:10px 0;border-bottom:1px solid var(--bdr)">
+                <span style="color:var(--gold);font-size:12px;min-width:44px;font-weight:600">20:45</span>
+                <span style="font-size:12px;color:var(--txt2)">自由品鉴时间，与酿酒师及同好自由交流</span>
+              </div>
+              <div style="display:flex;gap:12px;padding:10px 0">
+                <span style="color:var(--gold);font-size:12px;min-width:44px;font-weight:600">21:30</span>
+                <span style="font-size:12px;color:var(--txt2)">散场，L3 藏香者可参与闭门小圆桌继续深聊</span>
+              </div>
+            </div>
+          </div>
+
+        </div>
       </div>
     </div>
 
@@ -1065,13 +1263,12 @@ function renderOrders(){
 //  NAVIGATION
 // ════════════════════════════════════════════
 function showPage(pageId,back){
-  const pages=['pg-shop','pg-det','pg-cart','pg-mem','pg-orders','pg-profile'];
+  const pages=['pg-shop','pg-det','pg-cart','pg-mem','pg-orders','pg-profile','pg-aroma','pg-tasting'];
   pages.forEach(id=>{
     const el=document.getElementById(id);
-    if(id===pageId){
-      el.classList.remove('slide-back');
-      el.classList.add('show');
-    } else {
+    if(!el)return;
+    if(id===pageId){el.classList.remove('slide-back');el.classList.add('show');}
+    else{
       if(el.classList.contains('show')&&back)el.classList.add('slide-back');
       else el.classList.remove('slide-back');
       el.classList.remove('show');
@@ -1092,6 +1289,221 @@ function updateNav(){
   ['shop','mem','orders','profile'].forEach(t=>{
     document.getElementById('nb-'+t).classList.toggle('on',t===_curPage);
   });
+}
+function closeSubPage(which){
+  document.querySelector('.bottom-nav').style.visibility='visible';
+  showPage('pg-profile',true);
+  _curPage='profile';updateNav();
+}
+
+// ════════════════════════════════════════════
+//  AROMA WHEEL
+// ════════════════════════════════════════════
+function openAroma(){
+  const tier=getTier(CU);
+  if(tier==='L0'){toast('请先购买任意产品成为L1会员，即可解锁香气轮盘 🌿');return;}
+  renderAromaProducts();
+  document.querySelector('.bottom-nav').style.visibility='hidden';
+  showPage('pg-aroma',false);
+}
+
+function aromaClick(e){
+  const node=e.target.closest('[data-aroma]');
+  if(!node)return;
+  const name=node.getAttribute('data-aroma');
+  const desc=node.getAttribute('data-desc');
+  const info=document.getElementById('aroma-info');
+  document.getElementById('aroma-info-title').textContent='✦ '+name;
+  document.getElementById('aroma-info-desc').textContent=desc;
+  info.style.display='block';
+  // highlight selected
+  document.querySelectorAll('#aroma-svg circle[data-aroma]').forEach(c=>{
+    c.style.transform='';c.style.transformOrigin='';
+  });
+  if(node.tagName==='circle'){
+    node.style.transformOrigin=node.getAttribute('cx')+'px '+node.getAttribute('cy')+'px';
+    node.style.transform='scale(1.3)';
+  }
+  info.scrollIntoView({behavior:'smooth',block:'nearest'});
+}
+
+function renderAromaProducts(){
+  const PROD_AROMA=[
+    {name:'浅度·橡蓝',emoji:'🍺',color:'#4a8fc4',tags:['柑橘','草本辛香','麦芽'],main:'清爽柑橘酒花香为主，收口带草本辛香'},
+    {name:'净度·橡蓝',emoji:'🥛',color:'#8fa8b8',tags:['热带果香','柑橘花香','谷物甜'],main:'热带果香与柑橘花香，极致干爽收口'},
+    {name:'零度·橡蓝',emoji:'🌿',color:'#5a9e6f',tags:['香蕉·丁香','接骨木花','柑橘皮'],main:'香蕉丁香酯香明显，花果底香完整'},
+    {name:'半·橡蓝 IPA',emoji:'🍻',color:'#c9a84c',tags:['柑橘','热带果香','花香','草本'],main:'五重梯次，层层递进，回甘悠长'},
+    {name:'满·橡蓝 4×IPA',emoji:'🏆',color:'#8b5e3c',tags:['热带果香','松脂','树脂','草本'],main:'4倍酒花，醇厚饱满，层次最丰富'},
+  ];
+  document.getElementById('aroma-product-list').innerHTML=PROD_AROMA.map(p=>`
+    <div style="display:flex;gap:12px;align-items:flex-start;padding:12px 0;border-bottom:1px solid var(--bdr)">
+      <div style="width:40px;height:40px;border-radius:12px;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.08);display:flex;align-items:center;justify-content:center;font-size:22px;flex-shrink:0">${p.emoji}</div>
+      <div style="flex:1;min-width:0">
+        <div style="font-size:13px;font-weight:600;color:${p.color};margin-bottom:4px">${p.name}</div>
+        <div style="font-size:11px;color:var(--txt3);margin-bottom:6px">${p.main}</div>
+        <div style="display:flex;flex-wrap:wrap;gap:5px">${p.tags.map(t=>`<span style="background:rgba(255,255,255,.04);border:1px solid rgba(201,168,76,.18);padding:2px 10px;border-radius:20px;font-size:10px;color:var(--txt2)">${t}</span>`).join('')}</div>
+      </div>
+    </div>`).join('')+'<div style="height:1px"></div>';
+}
+
+// ════════════════════════════════════════════
+//  TASTING REGISTRATION
+// ════════════════════════════════════════════
+const SESSIONS=[
+  {id:'s1',city:'上海',venue:'橡蓝体验店 · 静安区昌平路88号',date:'2026年4月12日（周六）',time:'19:00–21:30',theme:'【度】系列专场：从浅度到零度，三款日常精酿横向品鉴',seats:30,left:7,price:{L1:68,L2:0,L3:0}},
+  {id:'s2',city:'北京',venue:'三里屯合作空间 · 工体北路甲2号',date:'2026年4月19日（周六）',time:'19:00–21:30',theme:'【时】系列专场：半·橡蓝IPA × 满·橡蓝4×IPA 双雄对决',seats:30,left:12,price:{L1:88,L2:0,L3:0}},
+  {id:'s3',city:'深圳',venue:'南山区海岸城精酿吧',date:'2026年5月10日（周六）',time:'19:00–21:30',theme:'年度品鉴：橡蓝五款全系列 · 酿酒师亲临解析',seats:25,left:18,price:{L1:108,L2:0,L3:0}},
+];
+let _selectedSession=null;
+let _selectedExp='';
+
+function openTasting(){
+  const tier=getTier(CU);
+  // badge
+  const bdg=document.getElementById('tasting-badge');
+  if(tier==='L2'||tier==='L3'){bdg.textContent='✦ 免费入场';Object.assign(bdg.style,{background:'rgba(26,128,144,.2)',color:'var(--teal2)',border:'1px solid rgba(34,170,190,.3)'});}
+  else if(tier==='L1'){bdg.textContent='优先报名';Object.assign(bdg.style,{background:'rgba(26,122,69,.2)',color:'var(--green2)',border:'1px solid rgba(34,160,90,.3)'});}
+  else{bdg.textContent='需登录';Object.assign(bdg.style,{background:'rgba(90,83,71,.2)',color:'var(--txt3)',border:'1px solid rgba(90,83,71,.3)'});}
+
+  // access notice
+  const notice=document.getElementById('tasting-access-notice');
+  if(tier==='L0'){
+    notice.innerHTML=`<div style="background:var(--redbg);border:1px solid var(--redbdr);border-radius:12px;padding:14px 16px;font-size:13px;color:#e07070;line-height:1.7">🔒 品鉴会报名为会员专属权益，请先购买任意产品成为 L1 尝香者后即可报名。</div>`;
+  } else if(tier==='L1'){
+    notice.innerHTML=`<div style="background:var(--greena);border:1px solid rgba(34,160,90,.3);border-radius:12px;padding:14px 16px;font-size:13px;color:var(--green2);line-height:1.7">✅ 您是 L1 尝香者，享有优先报名资格。升级至 L2 可享免费入场。</div>`;
+  } else {
+    notice.innerHTML=`<div style="background:var(--teala);border:1px solid rgba(34,170,190,.3);border-radius:12px;padding:14px 16px;font-size:13px;color:var(--teal2);line-height:1.7">🎟 您是 ${TIERS[tier].label}，享有品鉴会<strong>免费入场</strong>特权，无需支付场地费。</div>`;
+  }
+
+  renderSessions(tier);
+  renderMyRegs();
+  document.getElementById('tasting-form-wrap').style.display='none';
+  document.querySelector('.bottom-nav').style.visibility='hidden';
+  showPage('pg-tasting',false);
+}
+
+function renderSessions(tier){
+  const disc=tier==='L2'||tier==='L3';
+  document.getElementById('tasting-sessions').innerHTML=SESSIONS.map(s=>{
+    const price=disc?'免费':s.price.L1>0?'¥'+s.price.L1:'免费';
+    const full=s.left===0;
+    const myRegs=getMyRegs();
+    const registered=myRegs.some(r=>r.sid===s.id);
+    return `<div style="background:var(--bg2);border:1px solid ${registered?'var(--bdr2)':'var(--bdr)'};border-radius:16px;padding:16px;margin-bottom:12px;${registered?'box-shadow:0 0 0 1px rgba(201,168,76,.15)':''}">
+      <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:10px">
+        <div>
+          <span style="font-size:16px;font-weight:600;color:var(--gold2)">${s.city}</span>
+          <span style="font-size:11px;color:var(--txt3);margin-left:8px">${s.date}</span>
+        </div>
+        <span style="font-size:12px;padding:3px 10px;border-radius:20px;${full?'background:rgba(192,64,64,.12);color:#e07070;border:1px solid rgba(192,64,64,.3)':registered?'background:var(--greena);color:var(--green2);border:1px solid rgba(34,160,90,.3)':'background:var(--teala);color:var(--teal2);border:1px solid rgba(34,170,190,.3)'}">${full?'已满员':registered?'已报名':'剩余 '+s.left+' 席'}</span>
+      </div>
+      <div style="font-size:11px;color:var(--txt2);margin-bottom:4px">📍 ${s.venue}</div>
+      <div style="font-size:11px;color:var(--txt2);margin-bottom:8px">🕖 ${s.time}</div>
+      <div style="font-size:12px;color:var(--txt);background:rgba(255,255,255,.03);border-radius:8px;padding:8px 10px;margin-bottom:12px;line-height:1.6">${s.theme}</div>
+      <div style="display:flex;justify-content:space-between;align-items:center">
+        <span style="font-size:18px;font-weight:800;color:${disc?'var(--teal2)':'var(--gold2)'}">${price}</span>
+        ${registered
+          ?`<span style="font-size:12px;color:var(--green2);padding:9px 20px;border:1px solid rgba(34,160,90,.3);border-radius:10px">✓ 报名成功</span>`
+          :full
+          ?`<span style="font-size:12px;color:var(--txt3);padding:9px 20px;border:1px solid var(--bdr);border-radius:10px">已满员</span>`
+          :tier==='L0'
+          ?`<span style="font-size:12px;color:var(--txt3);padding:9px 20px;border:1px solid var(--bdr);border-radius:10px">需成为会员</span>`
+          :`<button onclick="selectSession('${s.id}')" style="background:var(--gold);color:var(--bg);padding:9px 20px;border-radius:10px;font-size:13px;font-weight:800">立即报名</button>`
+        }
+      </div>
+    </div>`;
+  }).join('');
+}
+
+function selectSession(sid){
+  _selectedSession=SESSIONS.find(s=>s.id===sid);
+  if(!_selectedSession)return;
+  const tier=getTier(CU);
+  const disc=tier==='L2'||tier==='L3';
+  document.getElementById('form-session-title').textContent=_selectedSession.city+' · '+_selectedSession.date;
+  document.getElementById('form-session-meta').textContent=
+    '📍 '+_selectedSession.venue+' · 🕖 '+_selectedSession.time+
+    (disc?' · 🎟 免费入场':' · 票价 ¥'+_selectedSession.price.L1);
+  document.getElementById('reg-name').value=CU.username||'';
+  document.getElementById('reg-phone').value='';
+  document.getElementById('reg-note').value='';
+  _selectedExp='';
+  document.querySelectorAll('.exp-opt').forEach(o=>{o.style.background='rgba(255,255,255,.04)';o.style.borderColor='var(--bdr)';o.style.color='var(--txt2)';});
+  const fw=document.getElementById('tasting-form-wrap');
+  fw.style.display='block';
+  fw.scrollIntoView({behavior:'smooth',block:'start'});
+}
+
+function selectExp(el){
+  _selectedExp=el.getAttribute('data-val');
+  document.querySelectorAll('.exp-opt').forEach(o=>{
+    const on=o===el;
+    o.style.background=on?'rgba(201,168,76,.15)':'rgba(255,255,255,.04)';
+    o.style.borderColor=on?'rgba(201,168,76,.6)':'var(--bdr)';
+    o.style.color=on?'var(--gold2)':'var(--txt2)';
+  });
+}
+
+function getMyRegs(){
+  try{return JSON.parse(localStorage.getItem('xb_regs_'+CU.email)||'[]');}catch(e){return[];}
+}
+function saveMyRegs(regs){
+  localStorage.setItem('xb_regs_'+CU.email,JSON.stringify(regs));
+}
+
+function submitReg(){
+  const name=document.getElementById('reg-name').value.trim();
+  const phone=document.getElementById('reg-phone').value.trim();
+  if(!name){toast('请填写姓名');return;}
+  if(!phone||phone.length<8){toast('请填写正确的手机号');return;}
+  if(!_selectedExp){toast('请选择精酿饮龄');return;}
+  if(!_selectedSession){return;}
+  const note=document.getElementById('reg-note').value.trim();
+  const tier=getTier(CU);
+  const disc=tier==='L2'||tier==='L3';
+  const reg={
+    sid:_selectedSession.id,
+    city:_selectedSession.city,
+    date:_selectedSession.date,
+    venue:_selectedSession.venue,
+    theme:_selectedSession.theme,
+    name,phone,exp:_selectedExp,note,
+    price:disc?0:_selectedSession.price.L1,
+    tier,
+    registeredAt:new Date().toLocaleDateString('zh-CN'),
+    no:'XBN'+Date.now().toString().slice(-6),
+  };
+  const regs=getMyRegs();
+  regs.unshift(reg);
+  saveMyRegs(regs);
+  // reduce seat count locally
+  const s=SESSIONS.find(x=>x.id===_selectedSession.id);
+  if(s&&s.left>0)s.left--;
+  document.getElementById('tasting-form-wrap').style.display='none';
+  renderSessions(tier);
+  renderMyRegs();
+  toast('报名成功！期待与您相见 🍺');
+}
+
+function renderMyRegs(){
+  const regs=getMyRegs();
+  const wrap=document.getElementById('my-regs-wrap');
+  const list=document.getElementById('my-regs-list');
+  if(regs.length===0){wrap.style.display='none';return;}
+  wrap.style.display='block';
+  list.innerHTML=regs.map(r=>`
+    <div style="background:var(--bg2);border:1px solid var(--bdr2);border-radius:14px;padding:14px 16px;margin-bottom:10px">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px">
+        <span style="font-size:15px;font-weight:600;color:var(--gold2)">${r.city} · ${r.date.slice(5)}</span>
+        <span style="font-size:10px;color:var(--green2);background:var(--greena);border:1px solid rgba(34,160,90,.3);padding:2px 9px;border-radius:20px">已确认</span>
+      </div>
+      <div style="font-size:11px;color:var(--txt2);margin-bottom:3px">📍 ${r.venue}</div>
+      <div style="font-size:11px;color:var(--txt2);margin-bottom:6px;line-height:1.5">${r.theme}</div>
+      <div style="display:flex;justify-content:space-between;font-size:11px;color:var(--txt3)">
+        <span>报名号 ${r.no} · ${r.name}</span>
+        <span>${r.price===0?'🎟 免费':'¥'+r.price}</span>
+      </div>
+    </div>`).join('');
 }
 
 // ════════════════════════════════════════════
