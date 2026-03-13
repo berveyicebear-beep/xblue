@@ -324,6 +324,10 @@ input{font-family:inherit;font-size:16px;outline:none;border:none}
         <div class="shop-hero">
           <div class="shop-hero-title">精酿选品</div>
           <div class="shop-hero-sub" id="shop-sub-txt">欢迎来到橡蓝精酿私域社群</div>
+          <div style="display:flex;gap:8px;margin-top:10px;flex-wrap:wrap">
+            <span style="background:rgba(74,143,196,.15);border:1px solid rgba(74,143,196,.3);color:#4a8fc4;padding:3px 12px;border-radius:20px;font-size:11px">【度】系列 · 日常型 3款</span>
+            <span style="background:rgba(139,94,60,.15);border:1px solid rgba(139,94,60,.3);color:#c9a84c;padding:3px 12px;border-radius:20px;font-size:11px">【时】系列 · 品鉴型 2款</span>
+          </div>
           <div class="disc-pill" id="disc-pill" style="display:none">
             <span class="disc-pill-txt">✦ 专属会员折扣已生效</span>
           </div>
@@ -517,40 +521,74 @@ input{font-family:inherit;font-size:16px;outline:none;border:none}
 // ════════════════════════════════════════════
 const PRODS = [
   {
-    id:'p1',name:'橡蓝·初酿',style:'American Pale Ale',price:38,abv:'5.2%',ibu:'35 IBU',
-    desc:'以新鲜柑橘与热带果香为核心，轻盈的麦芽骨架带来饱满口感，清爽的苦度令人回味。这是进入精酿世界最完美的起点，也是老饕最难忘的日常之选。',
-    aroma:['柑橘','热带水果','麦芽','花香','轻微苦味'],
-    badge:'',emoji:'🍺',color:'#c9a84c',bg:'rgba(201,168,76,.1)'
+    id:'p1',
+    name:'浅度·橡蓝',
+    series:'【度】系列 · 日常型',
+    style:'精酿啤酒 · 375ml',
+    price:18,
+    priceRange:'¥12–18',
+    abv:'≥2.5% vol',
+    ibu:'IBU 20',
+    desc:'入门精酿，轻度负担，清爽柑橘酒花香。热量较普通啤酒低约30%（工艺保证，非添加剂），清亮酒体，柑橘酒花香，杀口感明显，后味干净。\n\n酒花配方：卡斯卡特（柑橘）+ 亚麻黄（草本）+ 萨兹（辛香）\n谷物骨架：麦芽 + 小麦辅料\n\n推荐场景：朋友刚到家 · 火锅刚上桌 · 初次尝试精酿',
+    aroma:['柑橘','酒花','草本','辛香','清爽'],
+    target:'初尝精酿者 · 佐餐场景',
+    badge:'',emoji:'🍺',color:'#4a8fc4',bg:'rgba(74,143,196,.1)'
   },
   {
-    id:'p2',name:'橡蓝·深林',style:'Dark Porter',price:45,abv:'6.8%',ibu:'28 IBU',
-    desc:'以橡木桶慢速陈酿六个月，将黑巧克力、意式浓缩咖啡与木质单宁完美融合。每一口都是一次深邃的感官之旅，尾韵悠长，温暖迷人。',
-    aroma:['黑巧克力','咖啡','橡木','香草','焦糖'],
-    badge:'热销',emoji:'🍻',color:'#8b5e3c',bg:'rgba(139,94,60,.1)'
+    id:'p2',
+    name:'净度·橡蓝',
+    series:'【度】系列 · 日常型',
+    style:'精酿啤酒 · 375ml',
+    price:18,
+    priceRange:'¥12–18',
+    abv:'≥2.5% vol',
+    ibu:'残糖≤2.5g/L',
+    desc:'极致干型，低糖控糖，收口利落不粘腻。真正「干型」啤酒，残糖≤2.5g/L，极致干爽清冽，麦芽骨架清晰，收口无甜腻感。\n\n酒花配方：西姆科（热带果香）+ 阿马里洛（柑橘花香）极限发酵\n谷物骨架：大麦·小麦·荞麦·燕麦·青稞 五谷配比\n\n推荐场景：练完健身 · 商务宴请 · 不想喝多但不想喝水',
+    aroma:['热带果香','柑橘花香','干爽','麦芽','清冽'],
+    target:'健身人群 · 控糖者',
+    badge:'热销',emoji:'🥛',color:'#8fa8b8',bg:'rgba(143,168,184,.1)'
   },
   {
-    id:'p3',name:'橡蓝·晚秋',style:'Belgian Tripel',price:68,abv:'8.5%',ibu:'22 IBU',
-    desc:'传承比利时修道院百年酿造工艺，丁香、肉桂与无花果干的复杂香气在口中层叠展开，高度酒精被甜美蜜糖气息完美掩盖，余味可绵延数分钟。',
-    aroma:['丁香','肉桂','蜜糖','无花果','香蕉'],
-    badge:'新品',emoji:'🥂',color:'#3a8fa3',bg:'rgba(58,143,163,.1)'
+    id:'p3',
+    name:'零度·橡蓝',
+    series:'【度】系列 · 日常型',
+    style:'无醇精酿 · 330ml',
+    price:18,
+    priceRange:'¥12–18',
+    abv:'<0.5% vol',
+    ibu:'干投冷泡工艺',
+    desc:'趋近零酒精，完整酒花香气，全场景适饮。采用干投冷泡工艺，低温浸提酒花保香去醇，回填接骨木花·柑橘皮，香蕉·丁香酯香，顺滑无酒精刺激感，零脂。\n\n工艺亮点：干投冷泡 · 低温浸提 · 回填天然香料\n谷物骨架：全麦芽配方，不含大米等辅料\n\n推荐场景：驾车前 · 孕期 · 备孕 · 午间想小酌但下午有会',
+    aroma:['接骨木花','柑橘皮','香蕉','丁香','零酒精'],
+    target:'驾驶员 · 备孕 · 午间小酌',
+    badge:'新品',emoji:'🌿',color:'#5a9e6f',bg:'rgba(90,158,111,.1)'
   },
   {
-    id:'p4',name:'橡蓝·苔原',style:'Imperial Stout',price:88,abv:'10.2%',ibu:'55 IBU',
-    desc:'以波本桶陈酿，黑暗浓烈的帝国世涛，承载着烤麦芽、烟熏泥炭与深沉可可的厚重底色，波本桶赋予的香草与椰子气息点亮整体，是极寒之地的温暖。',
-    aroma:['烟熏','波本威士忌','可可','香草','椰子'],
-    badge:'限量',emoji:'🍶',color:'#7a3f6a',bg:'rgba(122,63,106,.1)'
+    id:'p4',
+    name:'半·橡蓝 IPA',
+    series:'【时】系列 · 品鉴型',
+    style:'IPA · 750ml',
+    price:93,
+    priceRange:'¥88–98',
+    abv:'≥4.5% vol',
+    ibu:'IBU 45',
+    desc:'半，是未满。刚好够探索，刚好不够尽兴。五重梯次酒花，一半探索一半享受，下午一个人一本书。\n\n酒花组合（五重梯次干投）：卡斯卡特（前段柑橘）→ 西姆科（中段热带果香）→ 世纪（中后段花香）→ 亚麻黄（收口草本）\n谷物：优质大麦麦芽为主，提供饱满酒体骨架\n\n风味：柑橘·热带水果·草本·辛香层次分明，苦度适中，回甘悠长\n推荐场景：周末一个人 · 一本书；或和同样懂的人相对不说话',
+    aroma:['柑橘','热带水果','草本','花香','回甘'],
+    target:'精酿进阶爱好者 · 饮龄2年以上',
+    badge:'',emoji:'🍻',color:'#c9a84c',bg:'rgba(201,168,76,.1)'
   },
   {
-    id:'p5',name:'满·橡蓝 礼盒',style:'六款招牌精酿豪华套装',price:298,abv:'多款',ibu:'—',
-    desc:'精选六款橡蓝招牌精酿，配以专业品鉴手册、香气轮盘卡片及定制醒酒器。是送礼自用的极佳之选。\n\n购买此礼盒将直接解锁 L3 藏香者会员资格，享受最高级会员权益。',
-    aroma:['完整系列','品鉴套装','专属定制','精装礼盒'],
-    badge:'L3解锁',emoji:'🎁',color:'#c9a84c',bg:'rgba(201,168,76,.08)',special:true
-  },
-  {
-    id:'p6',name:'橡蓝·白露',style:'Hefeweizen 小麦白啤',price:35,abv:'4.8%',ibu:'12 IBU',
-    desc:'正宗巴伐利亚小麦风格，天然发酵产生的丁香酚与异戊醇带来迷人的香蕉与丁香香气，浑浊金黄的酒体如同初秋清晨的第一缕阳光，清爽而温柔。',
-    aroma:['香蕉','丁香','小麦','柠檬','蜂蜜'],
-    badge:'',emoji:'🍺',color:'#8a9e4f',bg:'rgba(138,158,79,.1)'
+    id:'p5',
+    name:'满·橡蓝 4×IPA',
+    series:'【时】系列 · 品鉴型',
+    style:'帝国IPA · 1000ml · 限量',
+    price:348,
+    priceRange:'¥298–398',
+    abv:'≥10% vol',
+    ibu:'IBU 80+',
+    desc:'满，是极致。4倍酒花，不是炫技，是表达。\n\n精选当季最佳5品种（西楚·莫图依卡·银河·西姆科·亚麻黄），4倍投放量。年产一批，独立编号，每批酒花品种均在年份表印。\n\n限量机制：非国货，是一个诚意约定。年产一批·独立编号，留给懂的人。\n\n风味：馥郁热带水果·松脂·树脂·草本全层次叠加，醇厚饱满，余味持久\n推荐场景：你自己知道「今天值得」的日子；或和同样懂的人分一瓶聊一夜',
+    aroma:['热带水果','松脂','树脂','草本','醇厚'],
+    target:'资深收藏级爱好者 · 饮龄10年以上',
+    badge:'限量',emoji:'🏆',color:'#8b5e3c',bg:'rgba(139,94,60,.1)',special:true
   }
 ];
 
@@ -797,22 +835,25 @@ function refreshUI(){
 function renderProds(){
   const tier=getTier(CU);
   const disc=getDisc(tier);
-  const BC={热销:'#1a8090',新品:'#1a7a45',限量:'#7a3f6a','L3解锁':'#c9a84c'};
+  const BC={热销:'#1a8090',新品:'#1a7a45',限量:'#8b5e3c','L3解锁':'#c9a84c'};
   const BTC={热销:'#fff',新品:'#fff',限量:'#fff','L3解锁':'#0f1e2d'};
+  const seriesColor={'【度】系列 · 日常型':'#4a8fc4','【时】系列 · 品鉴型':'#8b5e3c'};
   document.getElementById('prod-grid').innerHTML=PRODS.map(p=>{
     const fp=applyDisc(p.price,tier);
+    const sc=seriesColor[p.series]||'#c9a84c';
     return `<div class="prod-card" onclick="openDet('${p.id}')">
       <div class="prod-thumb" style="background:${p.bg}">
         <span>${p.emoji}</span>
         ${p.badge?`<span class="prod-badge" style="background:${BC[p.badge]||'#1a8090'};color:${BTC[p.badge]||'#fff'}">${p.badge}</span>`:''}
       </div>
       <div class="prod-body">
+        <span style="display:block;font-size:9px;color:${sc};letter-spacing:1px;margin-bottom:3px;font-weight:600">${p.series}</span>
         <span class="prod-name">${p.name}</span>
-        <span class="prod-style">${p.style} · ABV ${p.abv}</span>
-        <span class="prod-desc">${p.desc}</span>
+        <span class="prod-style">${p.abv} · ${p.ibu} · ${p.style}</span>
+        <span class="prod-desc">${p.desc.split('\n')[0]}</span>
         <div class="prod-row">
           <div style="display:flex;align-items:baseline">
-            <span class="prod-price" id="pp-${p.id}">¥${fp}</span>
+            <span class="prod-price" id="pp-${p.id}">${disc<1?'¥'+fp:p.priceRange}</span>
             ${disc<1?`<span class="prod-orig">¥${p.price}</span>`:''}
           </div>
           <div class="btn-qadd" onclick="event.stopPropagation();quickAdd('${p.id}')">
@@ -826,9 +867,10 @@ function renderProds(){
 
 function refreshPrices(){
   const tier=getTier(CU);
+  const disc=getDisc(tier);
   PRODS.forEach(p=>{
     const el=document.getElementById('pp-'+p.id);
-    if(el)el.textContent='¥'+applyDisc(p.price,tier);
+    if(el)el.textContent=disc<1?'¥'+applyDisc(p.price,tier):p.priceRange;
   });
 }
 
@@ -856,15 +898,22 @@ function openDet(id){
   document.getElementById('det-hero').style.background=_detProd.bg;
   document.getElementById('det-emoji').textContent=_detProd.emoji;
   document.getElementById('det-name').textContent=_detProd.name;
-  document.getElementById('det-meta').textContent=_detProd.style+' · ABV '+_detProd.abv+' · '+_detProd.ibu+(disc<1?' · 会员价 ¥'+fp:'  ¥'+fp);
-  document.getElementById('det-desc').textContent=_detProd.desc;
+  const scLabel=_detProd.series+' · '+_detProd.abv+' · '+_detProd.ibu+(disc<1?' · 会员价 ¥'+fp:' · '+_detProd.priceRange);
+  document.getElementById('det-meta').textContent=scLabel;
+  document.getElementById('det-desc').innerHTML=_detProd.desc.replace(/\n\n/g,'<br><br>').replace(/\n/g,'<br>');
   document.getElementById('det-qty-val').textContent='1';
   const sp=document.getElementById('det-special');
-  if(_detProd.special){sp.style.display='block';sp.innerHTML='🏆 购买此礼盒将直接解锁 <strong>L3 藏香者</strong> 会员资格，享受最高级别专属权益。';}
-  else sp.style.display='none';
-  document.getElementById('det-aroma').innerHTML=(_detProd.aroma||[]).map((a,i)=>
-    `<span style="background:${AROMA_COLORS[i%AROMA_COLORS.length]};border:1px solid rgba(201,168,76,.2);padding:5px 13px;border-radius:20px;font-size:11px;color:var(--txt2)">${a}</span>`
-  ).join('');
+  if(_detProd.special){
+    sp.style.display='block';
+    sp.innerHTML='🏆 购买「满·橡蓝 4×IPA」将直接解锁 <strong>L3 藏香者</strong> 会员资格，享受最高级别专属权益。<br><br>⚠️ 年产一批，独立编号，售完即止。';
+  } else sp.style.display='none';
+  document.getElementById('det-aroma').innerHTML=
+    (_detProd.aroma||[]).map((a,i)=>
+      `<span style="background:${AROMA_COLORS[i%AROMA_COLORS.length]};border:1px solid rgba(201,168,76,.2);padding:5px 13px;border-radius:20px;font-size:11px;color:var(--txt2)">${a}</span>`
+    ).join('')+
+    `<div style="width:100%;margin-top:12px;padding:10px 14px;background:rgba(255,255,255,.03);border:1px solid var(--bdr);border-radius:12px;font-size:12px;color:var(--txt2)">
+      👥 目标人群：${_detProd.target||'—'}
+    </div>`;
   showPage('pg-det',false);
   document.querySelector('.bottom-nav').style.visibility='hidden';
 }
